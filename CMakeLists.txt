@@ -55,6 +55,10 @@ find_package(SDL3_image CONFIG REQUIRED)
 set(MF_SOURCES  
     src/event/handler.cpp
     src/event/run_loop.cpp
+    src/gpu/command_buffer.cpp
+    src/gpu/device.cpp
+    src/gpu/render_pass.cpp
+    src/gpu/texture.cpp
     src/context.cpp
     src/window.cpp
 )

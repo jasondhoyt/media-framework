@@ -6,5 +6,8 @@
 #include "context.hpp"
 #include "event/handler.hpp"
 #include "event/run_loop.hpp"
+#include "gpu/command_buffer.hpp"
+#include "gpu/device.hpp"
+#include "gpu/render_pass.hpp"
 #include "version.hpp"
 #include "window.hpp"
