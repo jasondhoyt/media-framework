@@ -11,7 +11,8 @@
 namespace jhoyt::mf::gpu
 {
 
-    texture::texture(SDL_GPUTexture *ptr, const class size &size) : ptr_(ptr), size_(size)
+    texture::texture(device_ptr device, SDL_GPUTexture *ptr, const class size &size)
+        : device_(std::move(device)), ptr_(ptr), size_(size)
     {
     }
 
@@ -21,36 +22,6 @@ namespace jhoyt::mf::gpu
         {
             SDL_ReleaseGPUTexture(device_->ptr(), ptr_);
         }
-    }
-
-    texture::texture(texture &&other) : device_(std::move(other.device_)), ptr_(other.ptr_), size_(other.size_)
-    {
-        other.ptr_ = nullptr;
-        other.size_ = {};
-    }
-
-    texture &texture::operator=(texture &&other)
-    {
-        if (this != &other)
-        {
-            if (ptr_)
-            {
-                if (device_)
-                {
-                    SDL_ReleaseGPUTexture(device_->ptr(), ptr_);
-                    device_.reset();
-                }
-
-                ptr_ = nullptr;
-                size_ = {};
-            }
-
-            std::swap(device_, other.device_);
-            std::swap(ptr_, other.ptr_);
-            std::swap(size_, other.size_);
-        }
-
-        return *this;
     }
 
 } // namespace jhoyt::mf::gpu

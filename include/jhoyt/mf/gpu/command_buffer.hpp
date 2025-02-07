@@ -3,11 +3,17 @@
 
 #pragma once
 
+#include <functional>
 #include <memory>
+#include <utility>
 
 #include <SDL3/SDL_gpu.h>
 
-#include "texture.hpp"
+#include "../color.hpp"
+#include "../fwd.hpp"
+#include "../size.hpp"
+#include "copy_pass.hpp"
+#include "render_pass.hpp"
 
 namespace jhoyt::mf
 {
@@ -17,32 +23,40 @@ namespace jhoyt::mf
     namespace gpu
     {
 
-        class device;
-
         class command_buffer final
         {
         public:
-            command_buffer(std::shared_ptr<device> device);
             ~command_buffer();
 
             command_buffer(const command_buffer &) = delete;
             command_buffer &operator=(const command_buffer &) = delete;
 
-            command_buffer(command_buffer &&other);
-            command_buffer &operator=(command_buffer &&other);
+            command_buffer(command_buffer &&) = delete;
+            command_buffer &operator=(command_buffer &&) = delete;
 
-            texture wait_and_acquire_swapchain_texture(const window &window);
+            void enqueue_copy_pass(std::function<void(copy_pass &)> fn);
 
-            void submit();
+            void enqueue_render_pass(const window &window,
+                                     const color &clear_color,
+                                     std::function<void(render_pass &, const size &)> fn);
+
+            void enqueue_render_pass(const window &window,
+                                     const color &clear_color,
+                                     const graphics_pipeline &pipeline,
+                                     std::function<void(render_pass &, const size &)> fn);
 
             auto ptr() const
             {
                 return ptr_;
             }
 
+            friend class device;
+
         private:
-            std::shared_ptr<device> device_;
             SDL_GPUCommandBuffer *ptr_;
+
+            command_buffer(SDL_GPUDevice *device);
+            void submit();
         };
 
     } // namespace gpu

@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <functional>
 #include <memory>
 #include <string>
 #include <vector>
@@ -10,6 +11,7 @@
 #include <SDL3/SDL_gpu.h>
 
 #include "shader_format.hpp"
+#include "texture_format.hpp"
 
 namespace jhoyt::mf
 {
@@ -19,6 +21,8 @@ namespace jhoyt::mf
 
     namespace gpu
     {
+
+        class command_buffer;
 
         class device final
         {
@@ -38,6 +42,10 @@ namespace jhoyt::mf
 
             void claim_window(std::shared_ptr<window> window);
             void release_window(const std::shared_ptr<window> &window);
+
+            texture_format swapchain_texture_format(const window &window);
+
+            void acquire_command_buffer(std::function<void(command_buffer &)> fn);
 
             auto ptr() const
             {

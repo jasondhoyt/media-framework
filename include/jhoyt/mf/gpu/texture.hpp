@@ -7,6 +7,7 @@
 
 #include <SDL3/SDL_gpu.h>
 
+#include "../fwd.hpp"
 #include "../size.hpp"
 
 namespace jhoyt::mf::gpu
@@ -17,15 +18,13 @@ namespace jhoyt::mf::gpu
     class texture final
     {
     public:
-        friend class command_buffer;
-
         ~texture();
 
         texture(const texture &) = delete;
         texture &operator=(const texture &) = delete;
 
-        texture(texture &&other);
-        texture &operator=(texture &&other);
+        texture(texture &&) = delete;
+        texture &operator=(texture &&) = delete;
 
         operator bool() const
         {
@@ -42,12 +41,14 @@ namespace jhoyt::mf::gpu
             return ptr_;
         }
 
+        friend class command_buffer;
+
     private:
-        std::shared_ptr<device> device_;
+        device_ptr device_;
         SDL_GPUTexture *ptr_;
         class size size_;
 
-        texture(SDL_GPUTexture *ptr, const class size &size);
+        texture(device_ptr device, SDL_GPUTexture *ptr, const class size &size);
     };
 
 } // namespace jhoyt::mf::gpu

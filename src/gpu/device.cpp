@@ -6,6 +6,7 @@
 
 #include "jhoyt/mf/gpu/device.hpp"
 
+#include "jhoyt/mf/gpu/command_buffer.hpp"
 #include "jhoyt/mf/window.hpp"
 
 namespace jhoyt::mf::gpu
@@ -61,6 +62,23 @@ namespace jhoyt::mf::gpu
 
         SDL_ReleaseWindowFromGPUDevice(ptr_, window->ptr());
         std::erase(windows_, window);
+    }
+
+    texture_format device::swapchain_texture_format(const window &window)
+    {
+        return static_cast<texture_format>(SDL_GetGPUSwapchainTextureFormat(ptr_, window.ptr()));
+    }
+
+    void device::acquire_command_buffer(std::function<void(command_buffer &)> fn)
+    {
+        if (!fn)
+        {
+            return;
+        }
+
+        auto cmd_buf = command_buffer{ptr_};
+        fn(cmd_buf);
+        cmd_buf.submit();
     }
 
 } // namespace jhoyt::mf::gpu

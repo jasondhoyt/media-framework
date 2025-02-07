@@ -56,9 +56,15 @@ set(MF_SOURCES
     src/event/handler.cpp
     src/event/run_loop.cpp
     src/gpu/command_buffer.cpp
+    src/gpu/copy_pass.cpp
+    src/gpu/buffer.cpp
     src/gpu/device.cpp
+    src/gpu/graphics_pipeline_descriptor.cpp
+    src/gpu/graphics_pipeline.cpp
     src/gpu/render_pass.cpp
+    src/gpu/shader.cpp
     src/gpu/texture.cpp
+    src/gpu/transfer_buffer.cpp
     src/context.cpp
     src/window.cpp
 )
