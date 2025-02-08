@@ -5,7 +5,9 @@
 
 #include <functional>
 #include <memory>
+#include <span>
 #include <utility>
+#include <vector>
 
 #include <SDL3/SDL_gpu.h>
 
@@ -44,6 +46,15 @@ namespace jhoyt::mf
                                      const color &clear_color,
                                      const graphics_pipeline &pipeline,
                                      std::function<void(render_pass &, const size &)> fn);
+
+            void push_vertex_uniform_data(uint32_t slot_index, const std::span<const uint8_t> &data);
+
+            template <class T, size_t N>
+            void push_vertex_uniform_data(uint32_t slot_index, const std::array<T, N> &data)
+            {
+                push_vertex_uniform_data(slot_index,
+                                         {reinterpret_cast<const uint8_t *>(data.data()), sizeof(T) * data.size()});
+            }
 
             auto ptr() const
             {

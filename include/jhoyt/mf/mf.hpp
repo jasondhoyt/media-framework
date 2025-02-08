@@ -17,5 +17,6 @@
 #include "gpu/texture.hpp"
 #include "gpu/transfer_buffer.hpp"
 #include "surface.hpp"
+#include "util/matrix4x4.hpp"
 #include "version.hpp"
 #include "window.hpp"

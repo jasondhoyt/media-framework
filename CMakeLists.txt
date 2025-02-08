@@ -66,6 +66,7 @@ set(MF_SOURCES
     src/gpu/shader.cpp
     src/gpu/texture.cpp
     src/gpu/transfer_buffer.cpp
+    src/util/matrix4x4.cpp
     src/context.cpp
     src/surface.cpp
     src/window.cpp

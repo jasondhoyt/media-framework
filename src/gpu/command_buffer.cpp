@@ -94,6 +94,11 @@ namespace jhoyt::mf::gpu
         }
     }
 
+    void command_buffer::push_vertex_uniform_data(uint32_t slot_index, const std::span<const uint8_t> &data)
+    {
+        SDL_PushGPUVertexUniformData(ptr_, slot_index, data.data(), static_cast<uint32_t>(data.size()));
+    }
+
     void command_buffer::submit()
     {
         if (ptr_)
