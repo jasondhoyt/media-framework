@@ -5,12 +5,15 @@
 
 #include <SDL3/SDL_gpu.h>
 
-#include "jhoyt/mf/color.hpp"
+#include "../color.hpp"
+#include "index_element_size.hpp"
 
 namespace jhoyt::mf::gpu
 {
 
     class buffer;
+    class sampler;
+    class texture;
 
     class render_pass final
     {
@@ -24,11 +27,19 @@ namespace jhoyt::mf::gpu
         render_pass &operator=(render_pass &&) = delete;
 
         void bind_vertex_buffer(uint32_t slot, const buffer &buffer);
+        void bind_index_buffer(const buffer &buffer, index_element_size index_element_size);
+        void bind_fragment_sampler(uint32_t slot, const texture &texture, const sampler &sampler);
 
         void draw_primitives(uint32_t num_vertices,
                              uint32_t num_instance = 1,
                              uint32_t first_vertex = 0,
                              uint32_t first_instance = 0);
+
+        void draw_indexed_primitives(uint32_t num_indices,
+                                     uint32_t num_instances = 1,
+                                     uint32_t first_index = 0,
+                                     int32_t vertex_offset = 0,
+                                     uint32_t first_instance = 0);
 
         auto ptr() const
         {

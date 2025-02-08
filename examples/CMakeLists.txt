@@ -1,2 +1,3 @@
+add_subdirectory(basic_textured_quad)
 add_subdirectory(basic_vertex_buffer)
 add_subdirectory(basic_window)

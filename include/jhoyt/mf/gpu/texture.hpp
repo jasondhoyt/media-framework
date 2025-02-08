@@ -9,6 +9,9 @@
 
 #include "../fwd.hpp"
 #include "../size.hpp"
+#include "texture_format.hpp"
+#include "texture_type.hpp"
+#include "texture_usage.hpp"
 
 namespace jhoyt::mf::gpu
 {
@@ -18,6 +21,9 @@ namespace jhoyt::mf::gpu
     class texture final
     {
     public:
+        static texture_ptr create(
+            device_ptr device, texture_type type, texture_format format, texture_usage_flags usage, const size &size);
+
         ~texture();
 
         texture(const texture &) = delete;

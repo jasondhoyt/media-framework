@@ -17,6 +17,7 @@ namespace jhoyt::mf::gpu
     {
         if (!ptr_)
         {
+            printf("%s\n", SDL_GetError());
             throw std::runtime_error{SDL_GetError()};
         }
     }

@@ -18,21 +18,6 @@ namespace jhoyt::mf::gpu
     void graphics_pipeline_descriptor::add_color_target_description(texture_format format,
                                                                     const blend_state &blend_state)
     {
-
-        SDL_GPUBlendFactor src_color_blendfactor; /**< The value to be multiplied by the source RGB value. */
-        SDL_GPUBlendFactor dst_color_blendfactor; /**< The value to be multiplied by the destination RGB value. */
-        SDL_GPUBlendOp color_blend_op;            /**< The blend operation for the RGB components. */
-        SDL_GPUBlendFactor src_alpha_blendfactor; /**< The value to be multiplied by the source alpha. */
-        SDL_GPUBlendFactor dst_alpha_blendfactor; /**< The value to be multiplied by the destination alpha. */
-        SDL_GPUBlendOp alpha_blend_op;            /**< The blend operation for the alpha component. */
-        SDL_GPUColorComponentFlags
-            color_write_mask; /**< A bitmask specifying which of the RGBA components are enabled for writing. Writes to
-                                 all channels if enable_color_write_mask is false. */
-        bool enable_blend;    /**< Whether blending is enabled for the color target. */
-        bool enable_color_write_mask; /**< Whether the color write mask is enabled. */
-        Uint8 padding1;
-        Uint8 padding2;
-
         auto info = SDL_GPUColorTargetDescription{
             .format = static_cast<SDL_GPUTextureFormat>(format),
             .blend_state = {

@@ -62,10 +62,12 @@ set(MF_SOURCES
     src/gpu/graphics_pipeline_descriptor.cpp
     src/gpu/graphics_pipeline.cpp
     src/gpu/render_pass.cpp
+    src/gpu/sampler.cpp
     src/gpu/shader.cpp
     src/gpu/texture.cpp
     src/gpu/transfer_buffer.cpp
     src/context.cpp
+    src/surface.cpp
     src/window.cpp
 )
 

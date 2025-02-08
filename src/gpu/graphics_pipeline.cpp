@@ -22,6 +22,7 @@ namespace jhoyt::mf::gpu
         auto ptr = SDL_CreateGPUGraphicsPipeline(device->ptr(), &info);
         if (!ptr)
         {
+            printf("%s\n", SDL_GetError());
             throw std::runtime_error{SDL_GetError()};
         }
 
