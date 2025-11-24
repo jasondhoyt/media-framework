@@ -70,6 +70,7 @@ endif ()
 
 set(MF_SOURCES
         src/context.cpp
+        src/properties.cpp
 )
 
 if (MF_BUILD_SHARED OR BUILD_SHARED_LIBS)

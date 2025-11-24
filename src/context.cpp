@@ -41,7 +41,7 @@ namespace jhoyt::mf
         inc_init_count();
     }
 
-    context::context(subsystem_flags subsystems) : init_flags_(subsystems)
+    context::context(const subsystem_flags subsystems) : init_flags_(subsystems)
     {
         if (init_flags_.value() > 0)
         {
