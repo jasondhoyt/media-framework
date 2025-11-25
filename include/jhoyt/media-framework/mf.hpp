@@ -3,5 +3,7 @@
 
 #pragma once
 
-#include "version.hpp"
 #include "context.hpp"
+#include "display.hpp"
+#include "surface.hpp"
+#include "version.hpp"

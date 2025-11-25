@@ -57,6 +57,8 @@ namespace jhoyt::mf
 
         [[nodiscard]] std::vector<std::string> get_property_names() const;
 
+        [[nodiscard]] property_value get_property(const char* name) const;
+
         [[nodiscard]] property_value get_property(const std::string& name) const;
 
         [[nodiscard]] property_type get_property_type(const std::string& name) const;

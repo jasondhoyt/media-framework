@@ -71,6 +71,8 @@ endif ()
 set(MF_SOURCES
         src/blend_mode.cpp
         src/context.cpp
+        src/display.cpp
+        src/display_properties.cpp
         src/palette.cpp
         src/properties.cpp
         src/surface.cpp

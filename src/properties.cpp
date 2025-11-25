@@ -96,33 +96,38 @@ namespace jhoyt::mf
         return names;
     }
 
-    property_value properties::get_property(const std::string& name) const
+    property_value properties::get_property(const char* name) const
     {
         assert(id_ > 0);
 
-        switch (static_cast<property_type>(SDL_GetPropertyType(id_, name.c_str())))
+        switch (static_cast<property_type>(SDL_GetPropertyType(id_, name)))
         {
         case property_type::invalid:
             return {};
 
         case property_type::pointer:
-            return SDL_GetPointerProperty(id_, name.c_str(), nullptr);
+            return SDL_GetPointerProperty(id_, name, nullptr);
 
         case property_type::string:
-            return SDL_GetStringProperty(id_, name.c_str(), "");
+            return SDL_GetStringProperty(id_, name, "");
 
         case property_type::number:
-            return SDL_GetNumberProperty(id_, name.c_str(), 0);
+            return SDL_GetNumberProperty(id_, name, 0);
 
         case property_type::real:
-            return SDL_GetFloatProperty(id_, name.c_str(), 0.0f);
+            return SDL_GetFloatProperty(id_, name, 0.0f);
 
         case property_type::boolean:
-            return SDL_GetBooleanProperty(id_, name.c_str(), false);
+            return SDL_GetBooleanProperty(id_, name, false);
 
         default:
             assert(false);
         }
+    }
+
+    property_value properties::get_property(const std::string& name) const
+    {
+        return get_property(name.c_str());
     }
 
     property_type properties::get_property_type(const std::string& name) const
