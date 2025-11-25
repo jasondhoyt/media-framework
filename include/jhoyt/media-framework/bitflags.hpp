@@ -19,7 +19,7 @@ namespace jhoyt::mf
 
         template <typename... Args>
             requires all_same_type<T, Args...>
-        explicit bitflags(Args... args) : value_((static_cast<V>(args) | ...))
+        bitflags(Args... args) : value_((static_cast<V>(args) | ...))
         {
         }
 

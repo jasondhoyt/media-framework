@@ -69,8 +69,11 @@ endif ()
 #
 
 set(MF_SOURCES
+        src/blend_mode.cpp
         src/context.cpp
+        src/palette.cpp
         src/properties.cpp
+        src/surface.cpp
 )
 
 if (MF_BUILD_SHARED OR BUILD_SHARED_LIBS)
