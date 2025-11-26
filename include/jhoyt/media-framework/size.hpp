@@ -3,7 +3,13 @@
 
 #pragma once
 
-#include "context.hpp"
-#include "display.hpp"
-#include "surface.hpp"
-#include "version.hpp"
+namespace jhoyt::mf
+{
+
+    struct size
+    {
+        int w = 0;
+        int h = 0;
+    };
+
+} // namespace jhoyt::mf

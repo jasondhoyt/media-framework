@@ -15,6 +15,13 @@ namespace jhoyt::mf
     template <typename T, typename V> class bitflags final
     {
     public:
+        static bitflags from_value(V value)
+        {
+            auto flags = bitflags{};
+            flags.value_ = value;
+            return flags;
+        }
+
         bitflags() = default;
 
         template <typename... Args>

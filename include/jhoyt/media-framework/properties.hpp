@@ -67,6 +67,8 @@ namespace jhoyt::mf
 
         void lock();
 
+        void set_property(const char* name, const property_value& value);
+
         void set_property(const std::string& name, const property_value& value);
 
         void unlock();

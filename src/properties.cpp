@@ -151,7 +151,7 @@ namespace jhoyt::mf
         }
     }
 
-    void properties::set_property(const std::string& name, const property_value& value)
+    void properties::set_property(const char* name, const property_value& value)
     {
         switch (get_type(value))
         {
@@ -159,35 +159,35 @@ namespace jhoyt::mf
             break;
 
         case property_type::pointer:
-            if (!SDL_SetPointerProperty(id_, name.c_str(), *std::get_if<void*>(&value)))
+            if (!SDL_SetPointerProperty(id_, name, *std::get_if<void*>(&value)))
             {
                 throw std::runtime_error{SDL_GetError()};
             }
             break;
 
         case property_type::string:
-            if (!SDL_SetStringProperty(id_, name.c_str(), std::get_if<std::string>(&value)->c_str()))
+            if (!SDL_SetStringProperty(id_, name, std::get_if<std::string>(&value)->c_str()))
             {
                 throw std::runtime_error{SDL_GetError()};
             }
             break;
 
         case property_type::number:
-            if (!SDL_SetNumberProperty(id_, name.c_str(), *std::get_if<int64_t>(&value)))
+            if (!SDL_SetNumberProperty(id_, name, *std::get_if<int64_t>(&value)))
             {
                 throw std::runtime_error{SDL_GetError()};
             }
             break;
 
         case property_type::real:
-            if (!SDL_SetFloatProperty(id_, name.c_str(), *std::get_if<float>(&value)))
+            if (!SDL_SetFloatProperty(id_, name, *std::get_if<float>(&value)))
             {
                 throw std::runtime_error{SDL_GetError()};
             }
             break;
 
         case property_type::boolean:
-            if (!SDL_SetBooleanProperty(id_, name.c_str(), *std::get_if<bool>(&value)))
+            if (!SDL_SetBooleanProperty(id_, name, *std::get_if<bool>(&value)))
             {
                 throw std::runtime_error{SDL_GetError()};
             }
@@ -196,6 +196,11 @@ namespace jhoyt::mf
         default:
             assert(false);
         }
+    }
+
+    void properties::set_property(const std::string& name, const property_value& value)
+    {
+        set_property(name.c_str(), value);
     }
 
     void properties::unlock()

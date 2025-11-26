@@ -76,6 +76,9 @@ set(MF_SOURCES
         src/palette.cpp
         src/properties.cpp
         src/surface.cpp
+        src/window.cpp
+        src/window_create_properties.cpp
+        src/window_properties.cpp
 )
 
 if (MF_BUILD_SHARED OR BUILD_SHARED_LIBS)
